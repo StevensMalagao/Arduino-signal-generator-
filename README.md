@@ -25,3 +25,6 @@ El código utiliza PORTD para escribir directamente en el puerto D del microcont
 Delays
 delayMicroseconds(20) se utiliza para controlar el tiempo entre cada muestra de la señal, esencial para determinar la frecuencia de la onda.
 Este código muestra un ejemplo avanzado de manipulación directa de puertos en un microcontrolador Arduino para generar señales electrónicas, lo que puede ser útil para aplicaciones que requieren representar señales biométricas o para la enseñanza de conceptos de electrónica y procesamiento de señales.
+
+![image](https://github.com/user-attachments/assets/7ff4842f-f7bd-449f-9ea4-3cc9c6ed9ec1)
+
