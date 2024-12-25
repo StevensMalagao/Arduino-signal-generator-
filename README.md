@@ -1,6 +1,6 @@
 # Arduino Signal Generator
 
-# Descripción del Código
+## Descripción del Código
 
 Este código está diseñado para generar diferentes tipos de señales utilizando un Arduino, permitiendo al usuario seleccionar entre una onda senoidal, una onda de diente de sierra, una señal ECG o una onda cuadrada. La selección de la señal se realiza mediante dos interruptores conectados a los pines digitales 8 y 9 del Arduino.
 
