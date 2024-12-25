@@ -1,19 +1,32 @@
-# Arduino-signal-generator
+# Arduino Signal Generator
 
-Este código permite generar diferentes tipos de señales utilizando un Arduino. Se han implementado varias formas de onda, como la onda senoidal, diente de sierra, cuadrada y una señal ECG, las cuales se pueden seleccionar mediante dos interruptores conectados a los pines digitales 8 y 9.
+# Descripción del Código
 
-Onda Senoidal: Cuando el primer interruptor (switchPin1) está en estado bajo (LOW) y el segundo interruptor (switchPin2) está en estado alto (HIGH), se genera una onda senoidal.
+Este código está diseñado para generar diferentes tipos de señales utilizando un Arduino, permitiendo al usuario seleccionar entre una onda senoidal, una onda de diente de sierra, una señal ECG o una onda cuadrada. La selección de la señal se realiza mediante dos interruptores conectados a los pines digitales 8 y 9 del Arduino.
 
-Onda Diente de Sierra: Si el primer interruptor está en estado alto (HIGH) y el segundo en estado bajo (LOW), se genera una onda de diente de sierra. Esta onda aumenta linealmente desde 0 hasta 255, repitiéndose continuamente.
+## Funcionamiento:
 
-Señal ECG: Cuando ambos interruptores están en estado bajo (LOW), se reproduce una señal predefinida de un ECG. Esta señal se almacena en un arreglo de valores que representan los puntos de la onda, y se envía al puerto de salida del Arduino.
+### 1. **Onda Senoidal**:
+Cuando el primer interruptor (conectado al pin 8) está en estado bajo (LOW) y el segundo interruptor (conectado al pin 9) está en estado alto (HIGH), se genera una onda senoidal. El código realiza un cálculo para generar los valores de la onda senoidal, utilizando la función `sin()` para calcular el valor de la señal en cada uno de los 360 grados de la onda.
 
-Onda Cuadrada: En cualquier otro caso, si ambos interruptores están en estado alto (HIGH), se genera una onda cuadrada. En esta señal, el valor oscila entre 0 y 255, alternando de forma abrupta en intervalos definidos.
+### 2. **Onda Diente de Sierra**:
+Si el primer interruptor está en estado alto (HIGH) y el segundo está en estado bajo (LOW), se genera una onda de diente de sierra. En este caso, la señal aumenta linealmente desde 0 hasta 255 y luego se repite, creando una forma de onda triangular que representa un diente de sierra.
 
-El código utiliza el registro PORTD para controlar las salidas digitales del Arduino, lo que permite generar las señales de forma rápida. La temporización de cada señal se ajusta utilizando delayMicroseconds, controlando así la frecuencia de las ondas.
+### 3. **Señal ECG**:
+Si ambos interruptores están en estado bajo (LOW), se reproduce una señal ECG predefinida. Esta señal está almacenada en un arreglo llamado `ecgWave[]`, que contiene una serie de valores que representan los puntos de la onda ECG. Estos valores se envían secuencialmente al puerto de salida para generar la señal correspondiente.
 
-La siguiente imagen muestra cómo se deben realizar las conexiones de la red con el Arduino y su punto de conexión para observar las señales en el osciloscopio:
+### 4. **Onda Cuadrada**:
+En cualquier otro caso, si ambos interruptores están en estado alto (HIGH), se genera una onda cuadrada. Esta señal alterna entre los valores 0 y 255, creando una forma de onda que tiene transiciones abruptas de bajo a alto.
 
-![image](https://github.com/user-attachments/assets/7a650b0a-33af-47c6-92f7-f16c93a45082)
+## Control de la Frecuencia:
+La frecuencia de las señales generadas se controla mediante la lectura de un valor de un pin analógico (A5). Este valor se mapea a un rango de tiempo para el cual se introduce un retraso con la función `delayMicroseconds(signalTime)`, ajustando así la frecuencia de la señal dependiendo de la entrada analógica.
+
+El código hace uso del registro `PORTD` para manipular directamente las salidas digitales del Arduino, lo que permite generar las señales con un control más rápido. El uso de `delayMicroseconds()` permite ajustar con precisión el tiempo de emisión de cada señal, logrando así que cada tipo de onda tenga la frecuencia adecuada.
+
+La siguiente figura muestra cómo se deben realizar las conexiones de la red con el Arduino y su punto de conexión para observar las señales en el osciloscopio:
+
+![image](https://github.com/user-attachments/assets/b54d6322-8f1f-49d3-9239-a005777088f0)
+
+
 
 
