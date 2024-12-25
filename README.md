@@ -1,30 +1,19 @@
-# Arduino-signal-generator-
-Estructura General
-El código se divide en dos partes principales: setup() y loop().
+# Arduino-signal-generator
 
-setup(): Es una función que se ejecuta una vez al inicio. Aquí se configuran los pines de los interruptores y los pines de salida.
-loop(): Es una función que se ejecuta continuamente después de setup(). Contiene la lógica principal para generar las formas de onda.
-Variables y Configuración Inicial
-Se definen dos constantes switchPin1 y switchPin2 para leer el estado de dos interruptores.
-Se inicializan las variables switchState1 y switchState2 para almacenar el estado actual de estos interruptores.
-ecgWave[] es un array que almacena los valores para simular una señal electrocardiográfica (ECG).
-Se calcula la longitud del array ecgWave para su uso posterior en la generación de la onda ECG.
-Configuración de Pines
-En el setup(), se configuran los pines 0 a 7 como salidas y los pines correspondientes a los interruptores como entradas.
-Generación de Ondas
-En el bucle principal loop(), se lee el estado de los interruptores para decidir qué forma de onda generar.
-Si ambos interruptores están en alto, se genera una onda senoidal.
-Si switchPin1 está en alto y switchPin2 en bajo, se genera una onda diente de sierra.
-Si switchPin1 está en bajo y switchPin2 en alto, se reproduce la señal ECG detallada del array ecgWave.
-Técnicas de Generación de Ondas
-Para la onda senoidal, se utiliza la función sin() y se itera sobre 360 grados para generar los valores.
-La onda diente de sierra se genera mediante un bucle que incrementa el valor del puerto D directamente.
-La señal ECG utiliza un bucle for para iterar sobre cada valor del array ecgWave y enviarlo al puerto D.
-Manejo de Puertos
-El código utiliza PORTD para escribir directamente en el puerto D del microcontrolizador, lo que permite una operación más rápida que la función digitalWrite().
-Delays
-delayMicroseconds(20) se utiliza para controlar el tiempo entre cada muestra de la señal, esencial para determinar la frecuencia de la onda.
-Este código muestra un ejemplo avanzado de manipulación directa de puertos en un microcontrolador Arduino para generar señales electrónicas, lo que puede ser útil para aplicaciones que requieren representar señales biométricas o para la enseñanza de conceptos de electrónica y procesamiento de señales.
+Este código permite generar diferentes tipos de señales utilizando un Arduino. Se han implementado varias formas de onda, como la onda senoidal, diente de sierra, cuadrada y una señal ECG, las cuales se pueden seleccionar mediante dos interruptores conectados a los pines digitales 8 y 9.
 
-![image](https://github.com/user-attachments/assets/7ff4842f-f7bd-449f-9ea4-3cc9c6ed9ec1)
+Onda Senoidal: Cuando el primer interruptor (switchPin1) está en estado bajo (LOW) y el segundo interruptor (switchPin2) está en estado alto (HIGH), se genera una onda senoidal. Esta onda se calcula utilizando la función matemática sin(), la cual varía entre -127 y 127, generando un ciclo de 360 grados.
+
+Onda Diente de Sierra: Si el primer interruptor está en estado alto (HIGH) y el segundo en estado bajo (LOW), se genera una onda de diente de sierra. Esta onda aumenta linealmente desde 0 hasta 255, repitiéndose continuamente.
+
+Señal ECG: Cuando ambos interruptores están en estado bajo (LOW), se reproduce una señal predefinida de un ECG. Esta señal se almacena en un arreglo de valores que representan los puntos de la onda, y se envía al puerto de salida del Arduino.
+
+Onda Cuadrada: En cualquier otro caso, si ambos interruptores están en estado alto (HIGH), se genera una onda cuadrada. En esta señal, el valor oscila entre 0 y 255, alternando de forma abrupta en intervalos definidos.
+
+El código utiliza el registro PORTD para controlar las salidas digitales del Arduino, lo que permite generar las señales de forma rápida y eficiente. La temporización de cada señal se ajusta utilizando delayMicroseconds, controlando así la frecuencia de las ondas.
+
+La siguiente imagen muestra cómo se deben realizar las conexiones de la red con el Arduino y su punto de conexión para observar las señales en el osciloscopio:
+
+![image](https://github.com/user-attachments/assets/7a650b0a-33af-47c6-92f7-f16c93a45082)
+
 
